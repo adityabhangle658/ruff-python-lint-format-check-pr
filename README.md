@@ -13,24 +13,56 @@ This action makes use of 2 important things
    More info here: **https://github.com/tj-actions/changed-files**
 
 # How to use:
+
+1) Example: How to use action in existing flow
 ```
-Example: 
     - name: Python Ruff Lint and Format 
       uses: adityabhangle658/ruff-python-lint-format-check-pr@main
+```
+
+2) Sample Workflow
+```
+name: Adi - Ruff Test My Action
+
+on: 
+  pull_request:
+
+jobs:
+  code-quality-check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4.1.1
+
+    - name: Set Python Version
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python_version }}
+
+    - name: adi658-python-ruff-lint-format-check
+      uses: adityabhangle658/ruff-python-lint-format-check-pr@main
+ 
+    - name: Testing 
+      run: echo "Done"
 ```
 
 # What the error may look like: 
 If your python files have lint errors, it may look like this 
 
+<img width="1262" alt="image" src="https://github.com/adityabhangle658/ruff-python-lint-format-check-pr/assets/124627213/9e54d80d-41e3-4788-a098-d086f0dcc561">
 
 If your python files have format errors, it may look like this 
 
+<img width="1262" alt="image" src="https://github.com/adityabhangle658/ruff-python-lint-format-check-pr/assets/124627213/ffde048c-00b1-4640-a100-5bcc79c94d37">
 
 If your python files have both lint and format errors, it may look like this 
 
+<img width="1262" alt="image" src="https://github.com/adityabhangle658/ruff-python-lint-format-check-pr/assets/124627213/bcf60f09-2ec9-42d5-b21b-72cc9c12a785">
 
 And finally, if your code is clean, it will look like this 
 
+<img width="1262" alt="image" src="https://github.com/adityabhangle658/ruff-python-lint-format-check-pr/assets/124627213/55743e1e-d9fa-4793-90ec-2980084d69dd">
 
 You can auto resolve any formatting issues using
 ```
