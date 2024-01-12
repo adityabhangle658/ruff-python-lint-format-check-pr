@@ -22,7 +22,7 @@ This action makes use of 2 important things
 
 2) Sample Workflow
 ```
-name: Adi - Ruff Test My Action
+name: My Sample Workflow
 
 on: 
   pull_request:
@@ -40,7 +40,7 @@ jobs:
       with:
         python-version: ${{ inputs.python_version }}
 
-    - name: adi658-python-ruff-lint-format-check
+    - name: Python Ruff Lint and Format
       uses: adityabhangle658/ruff-python-lint-format-check-pr@main
  
     - name: Testing 
