@@ -1,0 +1,67 @@
+---
+name: adi658-python-ruff-lint-format-check
+description: Checks the lint and formatting only on **changed python files in PR** or even single commits in your repo
+author: Aditya Bhangle 
+branding: 
+  icon: 'paperclip'
+  color: 'white'
+runs:
+  using: composite
+  steps:
+    - name: Install Ruff
+      run: pip install ruff
+      shell: bash
+
+    - name: Get PR changes
+      id: get_py_files
+      uses: tj-actions/changed-files@v41
+      with:
+        files: "**.py"
+
+    - name: Check Python format using Ruff on changed files
+      id: adi658_ruff_format_check
+      continue-on-error: true
+      run: |
+        echo "Python files changed in PR: ${{
+        steps.get_py_files.outputs.all_changed_files }}"
+
+        if [ ! -z "${{ steps.get_py_files.outputs.all_changed_files }}" ]
+        then
+          ruff format --check ${{ steps.get_py_files.outputs.all_changed_files }}
+        else
+          echo "No python files changed in PR"
+        fi
+      shell: bash
+
+    - name: Check Python Lint using Ruff on changed files
+      id: adi658_ruff_lint_check
+      continue-on-error: true
+      run: |
+        echo "Python files changed in PR: ${{
+        steps.get_py_files.outputs.all_changed_files }}"
+
+        if [ ! -z "${{ steps.get_py_files.outputs.all_changed_files }}" ]
+        then
+          ruff check ${{ inputs.ruff_args }} ${{ steps.get_py_files.outputs.all_changed_files }}
+        else
+          echo "No python files changed in PR"
+        fi
+      shell: bash
+
+    - name: Format and Lint check Status
+      run: |
+        if [[ "${{ steps.adi658_ruff_format_check.outcome }}" == "success" && "${{ steps.adi658_ruff_lint_check.outcome }}" == success ]]; then
+          echo ""
+          echo "Lint and Format check on changed python files succedded"
+          echo ""
+        else
+          echo ""
+          echo "***** Lint/Format Checks on changed python files failed"
+          echo "***** Ruff Format check result: ${{ steps.adi658_ruff_format_check.outcome }}"
+          echo "***** Ruff Lint check result: ${{ steps.adi658_ruff_lint_check.outcome }}"
+          echo ""
+          echo "You can auto resolve any formatting issues using 'ruff format <foldername/or/space_separated_filenames>'. Pls make sure you check/test the code after auto-format"
+          echo "You can auto resolve any lint issues using 'ruff check <foldername/or/space_separated_filenames> --fix'. Pls make sure you check/test/format the code after auto-lint fix"
+          exit 1
+        fi   
+      shell: bash
