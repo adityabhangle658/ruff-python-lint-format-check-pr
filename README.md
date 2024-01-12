@@ -50,7 +50,7 @@ jobs:
 # What the error may look like: 
 If your python files have lint errors, it may look like this 
 
-<img width="1262" alt="image" src="https://github.com/adityabhangle658/ruff-python-lint-format-check-pr/assets/124627213/9e54d80d-41e3-4788-a098-d086f0dcc561">
+<img width="1675" alt="image" src="https://github.com/adityabhangle658/ruff-python-lint-format-check-pr/assets/124627213/7428e2fd-ec94-4ef1-85fe-3a286ffe56db">
 
 If your python files have format errors, it may look like this 
 
