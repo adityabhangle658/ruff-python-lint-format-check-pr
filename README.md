@@ -1,5 +1,5 @@
 # Github Action : 
-adityabhangle658/ruff-python-lint-format-check-pr@main
+adityabhangle658/ruff-python-lint-format-check-pr@v1.0.3
 
 # What it does 
 Now you can easily check the formatting and do a lint check on the python files in your repository. Not only that, to avoid changing multiple files at a time, this action only does a formating and lint check on the changed files in a PR 
@@ -17,7 +17,7 @@ This action makes use of 2 important things
 1) Example: How to use action in existing flow
 ```
     - name: Python Ruff Lint and Format 
-      uses: adityabhangle658/ruff-python-lint-format-check-pr@main
+      uses: adityabhangle658/ruff-python-lint-format-check-pr@v1.0.3
 ```
 
 2) Sample Workflow
@@ -41,7 +41,7 @@ jobs:
         python-version: ${{ inputs.python_version }}
 
     - name: Python Ruff Lint and Format
-      uses: adityabhangle658/ruff-python-lint-format-check-pr@main
+      uses: adityabhangle658/ruff-python-lint-format-check-pr@v1.0.3
  
     - name: Testing 
       run: echo "Done"
