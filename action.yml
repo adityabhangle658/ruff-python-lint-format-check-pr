@@ -1,5 +1,5 @@
 ---
-name: python-ruff-lint-format-check-pr-adi658
+name: Ruff Lint and Format check in PR Python files
 description: Checks the lint and formatting only on **changed python files in PR** or even single commits in your repo
 author: Aditya Bhangle 
 branding: 
